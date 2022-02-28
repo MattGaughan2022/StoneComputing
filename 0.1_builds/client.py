@@ -4,7 +4,7 @@ import os
 
 from PIL import Image
 
-from server import BUFFER_SIZE
+BUFFER_SIZE = 4096
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = input(str("Please enter the host address of the sender : "))

@@ -15,7 +15,7 @@ server.bind(addr)
 
 "Server is waitin for connection request."
 server.listen()
-print("[LISTENING] Server is waiting")
+print(f"[LISTENING] Server is waiting at {IP} : {port}.")
 
 while True:
     "Connection between server and client is successful."
@@ -25,13 +25,13 @@ while True:
     "Receiving the filename"
     filename = conn.recv(size).decode(format)
     print(f"[RECV] Receiving file name")
-    file = open(filename, "w")
+    file = open("server_user_data/"+filename, "w")
     conn.send("Filename Received.".encode(format))
 
     "Receiving the data of the file"
-    filename = conn.recv(size).decode(format)
+    data = conn.recv(size).decode(format)
     print(f"[RECV] Receiving file data")
-    file = open(filename, "w")
+    file.write(data)
     conn.send("File data Received.".encode(format))
 
     "Closing file"
@@ -39,4 +39,5 @@ while True:
 
     "Severing Connection"
     conn.close()
-    print(f"[DISCONNECTED] {addr} disconnected.")
+    print(f"[DISCONNECTED] {addr} disconnected from server.")
+    server.close(port)
